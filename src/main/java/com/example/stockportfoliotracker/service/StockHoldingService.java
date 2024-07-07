@@ -47,16 +47,14 @@ public class StockHoldingService {
     }
 
     private static StockHoldingDetails populateStockHolding(Map.Entry<String, List<Order>> entry, Map<String, Double> stockPrices) {
+        // Calculate the total quantity of stocks, adjusting for sells (negative quantities)
         double quantity = entry.getValue().stream().mapToDouble(order -> order.quantity() * (order.orderType() == OrderType.SELL ? -1 : 1)).sum();
         double price = stockPrices.get(entry.getKey());
         double marketValue = quantity * price;
 
         return new StockHoldingDetails(
                 entry.getKey(),
-                // Calculate the total quantity of stocks, adjusting for sells (negative quantities)
-                entry.getValue().stream()
-                        .mapToDouble(order -> order.quantity() * (order.orderType() == OrderType.SELL ? -1 : 1))
-                        .sum(),
+                quantity,
                 marketValue,
                 price
         );
