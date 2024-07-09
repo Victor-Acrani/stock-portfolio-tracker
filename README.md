@@ -176,6 +176,25 @@ Read [FMP API documentation](https://site.financialmodelingprep.com/developer/do
 }
 ```
 
+### Get Stock Holding Details (GET /stock-holdings)
+- JSON structure of the response:
+``` json
+[
+    {
+        "stockSymbol": "MSFT",
+        "quantity": 150.0,
+        "currentMarketValue": 69936.0,
+        "currentMarketPrice": 466.24
+    },
+    {
+        "stockSymbol": "AAPL",
+        "quantity": 450.0,
+        "currentMarketValue": 102519.0,
+        "currentMarketPrice": 227.82
+    }
+]
+```
+
 ## Benchmarking
 
 To showcase the performance improvements brought by Virtual Threads, we will conduct benchmarking using the Apache Benchmark tool. Follow these steps to run the benchmark tests:
