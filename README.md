@@ -5,12 +5,11 @@ Welcome to the Stock Management REST API tutorial! In this guide, we will build 
 ## Table of Contents
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-- [Set Database Container](#set-database-container)
-- [Set Database](#set-database)
 - [Features](#features)
+- [Getting Started](#getting-started)
+
 - [Benchmarking](#benchmarking)
-- [Referencies](#referencies)
+- [References](#references)
 
 ## Introduction
 
@@ -26,6 +25,13 @@ Towards the conclusion, we'll unravel the concept of Virtual Threads, delving in
 - **MySQL**
 - **RestClient API**
 - **Virtual Threads**
+
+## Features
+
+- **Java Records:** Leveraging Java's new record feature for data modeling.
+- **Spring Data JDBC:** Seamless data access and manipulation.
+- **External API Integration:** Fetching stock prices using the new RestClient API in Spring.
+- **Virtual Threads:** Enhancing performance and scalability with Java's Virtual Threads.
 
 ## Getting Started
 
@@ -110,13 +116,65 @@ CREATE TABLE orders
 );
 ```
 
+### Get FMP ApiKey
+Access [financialmodelingprep](https://site.financialmodelingprep.com/) and create an account to get you apikey for
+using the FMP API. For this example we are using the FMP Bulk Request end-point. 
+```http request
+https://financialmodelingprep.com/api/v3/quote/AAPL,MSFT?apikey=WtWfRwGN8sAadKJexYaDTsLuB5g8c6oE
+```
 
-## Features
+Read [FMP API documentation](https://site.financialmodelingprep.com/developer/docs) for better undestanting of how to use it.
 
-- **Java Records:** Leveraging Java's new record feature for data modeling.
-- **Spring Data JDBC:** Seamless data access and manipulation.
-- **External API Integration:** Fetching stock prices using the new RestClient API in Spring.
-- **Virtual Threads:** Enhancing performance and scalability with Java's Virtual Threads.
+## Endpoints
+### Get All Orders (GET /orders)
+- JSON structure of the response:
+``` json
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "stockSymbol": "AAPL",
+        "quantity": 200.0,
+        "price": 160.0,
+        "orderType": "BUY",
+        "orderDate": "2024-07-07T16:32:07"
+    },
+    {
+        "id": 2,
+        "user_id": 1,
+        "stockSymbol": "AAPL",
+        "quantity": 100.0,
+        "price": 161.0,
+        "orderType": "BUY",
+        "orderDate": "2024-07-07T16:35:16"
+    }
+]
+```
+
+### Create Order (POST /orders)
+- Receives a JSON payload.
+``` json
+{
+    "user_id": 1,
+    "stockSymbol": "AAPL",
+    "quantity": 200.0,
+    "price": 160.0,
+    "orderType": "BUY",  
+}
+```
+
+- JSON structure of the response:
+``` json
+{ 
+    "id": 1,
+    "user_id": 1,
+    "stockSymbol": "AAPL",
+    "quantity": 200.0,
+    "price": 160.0,
+    "orderType": "BUY",
+    "orderDate": "2024-07-07T16:32:07"
+}
+```
 
 ## Benchmarking
 
@@ -131,7 +189,7 @@ ab -n 1000 -c 10 http://localhost:8080/api/stocks
 
 Analyze the results to observe the performance benefits of Virtual Threads.
 
-## Referencies
+## References
 
 - [REST API with Spring Boot 3.3, Java 21 and Virtual Threads | Benchmarking performance](https://www.youtube.com/watch?v=iRiJqI3oAqA&list=LL&index=1&t=195s)
 
