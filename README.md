@@ -203,7 +203,7 @@ To showcase the performance improvements brought by Virtual Threads, we will con
 - Open a terminal and execute the benchmark:
 
 ```sh
-ab -n 1000 -c 10 http://localhost:8080/api/stocks
+ab -n 1000 -c 50 http://localhost:8080/stock-holdings
 ```
 
 Analyze the results to observe the performance benefits of Virtual Threads.
