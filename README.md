@@ -7,7 +7,7 @@ Welcome to the Stock Management REST API tutorial! In this guide, we will build 
 - [Technologies Used](#technologies-used)
 - [Features](#features)
 - [Getting Started](#getting-started)
-
+- [Endpoints](#endpoints)
 - [Benchmarking](#benchmarking)
 - [References](#references)
 
