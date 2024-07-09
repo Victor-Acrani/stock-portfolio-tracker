@@ -62,7 +62,7 @@ public class StockHoldingService {
 
     private Map<String,Double> getStockPriceMap(String stockSymbol) {
         return Objects.requireNonNull(stockPriceClient.get()
-                        .uri("/" + stockSymbol + "?apiKey=" + apiConfig.getApiKey())
+                        .uri("/" + stockSymbol + "?apikey=" + apiConfig.getApiKey())
                         .retrieve()
                         .body(new ParameterizedTypeReference<List<StockPrice>>() {
                         }))
