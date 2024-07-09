@@ -7,6 +7,7 @@ import com.example.stockportfoliotracker.model.StockHoldingDetails;
 import com.example.stockportfoliotracker.model.StockPrice;
 import com.example.stockportfoliotracker.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -18,12 +19,15 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class StockHoldingService {
     private final OrderRepository orderRepository;
     private final RestClient stockPriceClient;
     private final StockPriceAPIConfig apiConfig;
 
     public List<StockHoldingDetails> getStockHoldingDetails() {
+        log.info("Thread : {}", Thread.currentThread());
+
         // Retrieve all orders from the repository
         List<Order> orders = orderRepository.findAll();
 
